@@ -20,6 +20,7 @@ const bars = [{
   'pricePerPerson': 80
 }];
 
+
 //list of current booking events
 //useful for ALL steps
 //the time is hour
@@ -34,8 +35,8 @@ const events = [{
   'persons': 8,
   'options': {
     'deductibleReduction': false
-  },
-  'price': 0,
+    },
+    'price': 0,
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -50,7 +51,7 @@ const events = [{
   'options': {
     'deductibleReduction': true
   },
-  'price': 0,
+        'price': 0,
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -65,7 +66,7 @@ const events = [{
   'options': {
     'deductibleReduction': true
   },
-  'price': 0,
+        'price': 0,
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -146,6 +147,18 @@ const actors = [{
   }]
 }];
 
-console.log(bars);
+
+function SetPrice() {
+    for (var j = 0; j < events.length; j++) {
+        for (var i = 0; i < bars.length; i++) {
+            if (bars[i].id == events[j].barId) {
+                events[j].price = bars[i].pricePerHour * events[j].time + bars[i].pricePerPerson * events[j].persons;
+            }
+        }
+    }
+}
+
+SetPrice();
+//console.log(bars);
 console.log(events);
-console.log(actors);
+//console.log(actors);
