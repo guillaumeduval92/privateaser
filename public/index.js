@@ -158,6 +158,12 @@ function SetPrice() {
     }
 }
 
+
+/*function getBar(id){
+    return bars.find(bar => bar.id === id)
+}
+*/
+
 SetPrice();
 //console.log(bars);
 console.log(events);
