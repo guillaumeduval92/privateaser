@@ -164,6 +164,9 @@ function SetPrice() {
                 else {
                     events[j].price = bars[i].pricePerHour * events[j].time + bars[i].pricePerPerson * events[j].persons;
                 }
+                if (events[j].options.deductibleReduction == true) {
+                    events[j].price += events[j].persons;
+                }
 
             }
         }
