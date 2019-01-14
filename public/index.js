@@ -167,7 +167,6 @@ function SetPrice() {
                 if (events[j].options.deductibleReduction == true) {
                     events[j].price += events[j].persons;
                 }
-
             }
         }
     }
@@ -177,9 +176,32 @@ function SetCommission() {
     for (var j = 0; j < events.length; j++) {
         events[j].commission.insurance = events[j].price * 0.15;
         events[j].commission.treasury = events[j].persons;
-        events[j].commission.privateaser = events[j].commission.insurance - events[j].commission.treasury;
+        if (events[j].options.deductibleReduction == true) {
+            events[j].commission.privateaser = events[j].commission.insurance;
+        }
+        else {
+            events[j].commission.privateaser = events[j].commission.insurance - events[j].commission.treasury;
+        }
     }
+}
 
+function SetPayment() {
+    for (var i = 0; i < actors.length; i++) {
+        for (var j = 0; j < events.length; j++) {
+            if (actors[i].eventId == events[j].id) {
+                actors[i].payment[0].amount = events[j].price;
+                if (events[j].options.deductibleReduction == true) {
+                    actors[i].payment[1].amount = (events[j].price - events[j].persons) * 0.7;
+                }
+                else {
+                    actors[i].payment[1].amount = events[j].price * 0.7;
+                }
+                actors[i].payment[2].amount = events[j].commission.insurance;
+                actors[i].payment[3].amount = events[j].commission.treasury;
+                actors[i].payment[4].amount = events[j].commission.privateaser;
+            }
+        }
+    }
 }
 
 
@@ -190,6 +212,7 @@ function SetCommission() {
 
 SetPrice();
 SetCommission();
+SetPayment();
 //console.log(bars);
 console.log(events);
-//console.log(actors);
+console.log(actors);
