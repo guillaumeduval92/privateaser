@@ -170,6 +170,15 @@ function SetPrice() {
     }
 }
 
+function SetCommission() {
+    for (var j = 0; j < events.length; j++) {
+        events[j].commission.insurance = events[j].price * 0.15;
+        events[j].commission.treasury = events[j].persons;
+        events[j].commission.privateaser = events[j].commission.insurance - events[j].commission.treasury;
+    }
+
+}
+
 
 /*function getBar(id){
     return bars.find(bar => bar.id === id)
@@ -177,6 +186,7 @@ function SetPrice() {
 */
 
 SetPrice();
+SetCommission();
 //console.log(bars);
 console.log(events);
 //console.log(actors);
