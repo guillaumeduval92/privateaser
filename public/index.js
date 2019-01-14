@@ -152,7 +152,19 @@ function SetPrice() {
     for (var j = 0; j < events.length; j++) {
         for (var i = 0; i < bars.length; i++) {
             if (bars[i].id == events[j].barId) {
-                events[j].price = bars[i].pricePerHour * events[j].time + bars[i].pricePerPerson * events[j].persons;
+                if (events[j].persons > 60) {
+                    events[j].price = bars[i].pricePerHour * events[j].time + bars[i].pricePerPerson * events[j].persons * 0.5;
+                }
+                else if (events[j].persons > 20) {
+                    events[j].price = bars[i].pricePerHour * events[j].time + bars[i].pricePerPerson * events[j].persons * 0.7;
+                }
+                else if (events[j].persons > 10) {
+                    events[j].price = bars[i].pricePerHour * events[j].time + bars[i].pricePerPerson * events[j].persons * 0.9;
+                }
+                else {
+                    events[j].price = bars[i].pricePerHour * events[j].time + bars[i].pricePerPerson * events[j].persons;
+                }
+
             }
         }
     }
